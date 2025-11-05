@@ -2,25 +2,6 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
-  // For Turbopack
-  experimental: {
-    turbo: {
-      rules: {
-        '*.glsl': {
-          loaders: ['raw-loader'],
-          as: '*.js',
-        },
-        '*.vert': {
-          loaders: ['raw-loader'],
-          as: '*.js',
-        },
-        '*.frag': {
-          loaders: ['raw-loader'],
-          as: '*.js',
-        },
-      },
-    },
-  },
   // For webpack (fallback)
   webpack: (config) => {
     config.module.rules.push({
@@ -28,6 +9,22 @@ const nextConfig: NextConfig = {
       type: 'asset/source',
     });
     return config;
+  },
+  turbopack: {
+    rules: {
+      '*.glsl': {
+        loaders: ['raw-loader'],
+        as: '*.js',
+      },
+      '*.vert': {
+        loaders: ['raw-loader'],
+        as: '*.js',
+      },
+      '*.frag': {
+        loaders: ['raw-loader'],
+        as: '*.js',
+      },
+    }
   }
 };
 
